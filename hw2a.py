@@ -52,7 +52,7 @@ def Probability(PDF, args, c, GT=True):
 
     n = 100  # Number of intervals
     integral = Simpsons(lambda x: PDF(x, mu, sigma), a, b, n)
-    return 1 - integral if GT else integral
+    return integral if GT else -integral
 
 def main():
     """
@@ -69,7 +69,7 @@ def main():
         # c_values = [105, 100 + 2 * sigma]
         c = 105 if not condition else mu + 2 * sigma
         prob = Probability(PDF, (mu, sigma), c, GT=condition)
-        print(f"P(x{'>' if condition else '<'}{c}|N({mu},{sigma}))={prob:.2f}")
+        print(f"P(x{'>' if condition else '<'}{c}|N({mu},{sigma}))={prob:.4f}")
 
 if __name__ == "__main__":
     main()
